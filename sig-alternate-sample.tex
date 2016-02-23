@@ -72,7 +72,7 @@
 %\crdata{0-12345-67-8/90/01}  % Allows default copyright data (0-89791-88-6/97/05) to be over-ridden - IF NEED BE.
 % --- End of Author Metadata ---
 
-\title{Report for Homework 1}
+\title{Project Proposal}
 \subtitle{CS 7930 Social Media Mining\\
 Spring 2016}
 %\subtitle{[Extended Abstract]
@@ -137,8 +137,8 @@ Gopal Menon\\
 % is the number that will appear on the first page PLUS the
 % number that will appear in the \additionalauthors section.
 
-\maketitle
 
+\maketitle
 
 
 %
@@ -160,103 +160,59 @@ Gopal Menon\\
 % We no longer use \terms command
 %\terms{Theory}
 
-\section{Collecting Twitter Data}
-Tweets were collected by running a Python script containing Twitter RestAPI calls. When the geolocation was specified in the Search API, no tweets were returned. So it was decided to collect tweets without geolocation and later filter out tweets from outside USA. Specifying the end date for tweets in the Search API also resulted in no tweets being returned. So it was decided to search for tweets using only the start date and tweet language. An example is shown below.
-\begin{lstlisting}
-search_results = twitter_api.search.tweets 
-(q = 'donald trump
- since:2015-12-16',
-  lang='en') 
-print json.dumps(search_results)
-\end{lstlisting}
+\section{Background}
+The current front runners in the 2016 Presidential Election are Donald Trump from the Republican party and Hillary Clinton from the Democratic party. 
 
-As can be seen above, tweets in English, from December 16th, 2016, containing the string \textit{donald trump} were retrieved and then converted to JSON for easier parsing.\\
+The Republican party base has been steadily moving away from traditional candidates as they reportedly feel that they do not have a say in matters that are of importance to them. The rise of the Tea Party and the influence of Talk Radio, has reportedly made the Republican base disillusioned with Congress. In the last few elections, traditionally safe Republican candidates have been unseated in the primaries by Tea Party candidates.There has been growing discontent with President Obama's perceived Liberal agenda and people in the Republican base seem to want to start afresh with new candidates as they seem to have lost trust in career politicians.
 
-Each Search API request returned 15 tweets. Out of these tweets, only around 4 to 5 had user profile location within USA. As a result around 575 set of tweets needed to be collected for each candidate in order to obtain 2500 tweets per candidate with location information. Each set of retrieved tweets had metadata that specified the maximum id of the tweets that were received. This maximum id was used to retrieve the next set of tweets using the Search API by specifying the $since\_id:$ parameter as the maximum id from the set of tweets received previously. A delay of 62 seconds was added between subsequent retrievals so that the retrieval rate was within the limit required by Twitter.\\
+Trump is not a career politician and has no experience in government. He started out as an outside candidate who was not taken seriously. However he has succeeded in becoming the front-runner by appealing to the base of the republican party. He has been accused by many of being racist, fear mongering and wrong on things that he has put forward as facts. He is accused of being neither religious nor conservative and has still emerged as the likely nominee from his party. He is reportedly disliked by members of his own party, but despite this, has emerged as the leading candidate.
 
-Some sample tweets are shown in Appendix \ref{sssec:num1}.
+The Democratic party traditionally has its strong base in the East and West coasts, Liberals and minority communities. Unlike the Republican party, the Democrats have not been going through any internal turmoils. However, their candidate has had her share of problems. Clinton has been associated with scandals from the past like her husband's infidelities and the Whitewater investigations. During her term as Secretary of State, she was held responsible for the death of the American ambassador along with three other persons, during the attach on the consulate in Bengazhi. After her term, she was faced with the email scandal. Outside of her party she is reportedly disliked and is accused of being corrupt and is a very divisive figure.
 
-\section{Preprocessing the data}
+The Democrats, unlike the Republicans, started out with just four candidates and were left with only candidates - Hillary Clinton and Bernie Sanders. At the time of writing this proposal, Clinton seems to be the likely nominee from the party.
 
-The set of tweets returned by the Search API were stored as text files. These text files were picked up by a parsing program that extracted information from tweets and put it into an array.\\
+\section{Research Focus}
 
-The first step in the parsing program was to check if the user location in the profile was inside USA. This was done by searching for the state abbreviation and state name inside the user location. Those that were not found to be inside USA were rejected. The JSON tweet data was parsed to extract tweet components. Shown below is an example for extraction of the tweet text.  
+My research focus will be on using Tweets to find the profile of the supporters of the two candidates. I am primarily interested in finding out what issues matter to the supporters. 
 
-\begin{lstlisting}
-current_tweet.text = 
-candidate_tweets_json[0]['statuses'][count]['text']
-\end{lstlisting}
+\subsection{Why is it interesting}
+I find this interesting because of the success of the Trump campaign. He had been written off initially by news analysts and they did not expect him to last beyond the initial phase. His continued success has taken many people by surprise. By finding the issues that matter to his supporters, I can find out what are the key factors that drive the apparent demand for change among the base. Since the career politicians have not been successful, I can find out how the Republican party is out of touch with the issues that matter most to its base. The reasons could be perceived loss of employment opportunities due to globalization and illegal immigration, changes in the demographics of the voter population, perceived Liberal policies of President Obama, opposition to gay marriage and the Affordable Care Act (also known as Obamacare), fear of terrorism or it could be something that I have not thought of. Whatever the reasons are, they will be interesting as the emergence of Trump is an unforeseen phenomenon that maybe even he does not understand.
 
-The following were extracted from each tweet in a similar manner as shown above.
+The identification of issues important to the supporters of Clinton will be a bonus, but may not be as interesting as the issues that motivate Trump supporters.
 
-\begin{itemize}
-\item User Location
-\item State Code 
-\item Tweet creation timestamp
-\item Tweed ID
-\item Tweet Text
-\item User Screen Name
-\item User ID
-\item Tweet Place
-\item Number of Friends
-\item Number of Followers
-\item Tweet Languge
-\end{itemize}
+\subsection{Who will be interested}
+Social scientists, people who follow politics and key members of the two parties will potentially be interested in knowing the results of the investigation. 
 
-\subsection{Exploratory Analysis}
-\subsection{Winner by State}
-The number of tweets per candidate were summarized by state. This data is shown in Appendix \ref{sssec:num2}  along with the computation for the electoral votes per state. The winner is the candidate with the most votes and gets all the electoral votes. In the case of a tie, the votes are split and an integer value is assigned.\\
+The Republican party will be interested as they apparently need to change their focus since all their traditional candidates have been rejected by the primary voters. After the election of President Obama in 2008, many news analysts said that the Republican party needs to change its attitude towards that Latinos, who consist of the largest minority, in order to be viable in the future. The party may need to change in order to survive.  
 
-The states won by each candidate are shown in the traditional party colors - red for the Republicans and blue for the Democrats. This is illustrated in figures \ref{ContinentalUs}, \ref{Alaska} and \ref{Hawaii}. The votes were split for Wyoming and West Virginia and this is the reason that these states have not been marked red or blue. The maps were created using Google Maps.\\
+The Democrats on the other hand, have not had any issues with their traditional base. They would be interested in knowing what issues are important to their opponents and would want to use this information in order to to better compete.
 
-\begin{figure}
-\centering
-\includegraphics[width=3.5in, height=2.2in]{ContinentalUs.png}
-\caption{States won by the candidates - red for Trump and Blue for Clinton.}
-\label{ContinentalUs}
-\end{figure}
+\section{Previous Research}
 
-\begin{figure}
-\centering
-\includegraphics[width=2in, height=2in]{Alaska.png}
-\caption{Alaska winner - Trump.}
-\label{Alaska}
-\end{figure}
+Previous research has been done by Kloumann and Kleinberg \cite{SeedSet} on identifying members of a community starting from a small seed set. The seed set was expanded using PageRank and other algorithms. The PageRank algorithm reportedly had good results in identifying key members of a community given the seed set.
+\section{Approach}
+I plan to use the tweets collected as part of Assignment 1 as the seed set. If required, I will retrieve more tweets to use as part of the seed set. The PageRank algorithm will be used to identify important members of the community by sorting the community by PageRank and selecting the ones with the higher values. Once the important community members are available, I plan to use Latent Dirichlet allocation (LDA) topic modeling on their tweets using the R package for finding the topics important to them.
 
-\begin{figure}
-\centering
-\includegraphics[width=2.5in, height=2.5in]{Hawaii.png}
-\caption{Hawaii winner - Clinton.}
-\label{Hawaii}
-\end{figure}
+\subsection{Design}
+\subsection{Tools and Techniques}
+\section{Milestones}
+\section{Evaluation Criteria for Results}
 
-\subsection{Tweets per day over time}
-I did not get tweets that were distributed over the period of study. All the Clinton tweets were for January 29\textsuperscript{th} and 20\textsuperscript{th}, 2016. These were the days I retrieved the tweets and all the tweets retrieved were for those days. All Trump tweets were for January 30\textsuperscript{th} , 31\textsuperscript{st} and February 1\textsuperscript{st} 2016. Due to this reason I do not have data for the trend for tweets per day over time.
+\begin{thebibliography}{1}
 
-\subsection{Number of tweets by time of day}
+\bibitem{SeedSet}
+Kloumann, I.M. and Kleinberg, J.M., 2014, August. Community membership identification from small seed sets. In \emph{Proceedings of the 20th ACM SIGKDD international conference on Knowledge discovery and data mining} (pp. 1366-1375). ACM.
 
-\begin{figure}
-\centering
-\includegraphics[width=3.5in, height=2.5in]{TweetsByHour.png}
-\caption{Number of tweets by time of day.}
-\label{TweetTime}
-\end{figure}
+\bibitem{IRB}
+Manning, C. D., Raghavan, P., \& Sch\"utze, H. (2008). Introduction to information retrieval/Christopher D.
 
-Figure \ref{TweetTime} shows the number of tweets by time of day. The x-axis shows the hour of the day and the y-axis shows the corresponding number of tweets.\\
-
-It seems that Trump tweeters are intermittently active from 2 pm till 8 pm. After 8 pm, they remain active till around 3 am. Then they are inactive till 2 pm.\\
-
-On the other hand Clinton tweeters are inactive from 9 am till 9 pm and active at other times.\\
-
-Since the tweets that are returned by the Twitter Search API are from around the time the search was run, I have a suspicion that this trend over time of day corresponds to the time the tweets were retrieved. However I am not sure if that is the case or not.
-\subsection{Projected Winner}
-According to this analysis, the projected winner is Donald Trump with 269 to 264 electoral votes.
+\end{thebibliography}
 %
 % The following two commands are all you need in the
 % initial runs of your .tex file to
 % produce the bibliography for the citations in your paper.
-\bibliographystyle{abbrv}
-\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+%\bibliographystyle{abbrv}
+%\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
 % You must have a proper ".bib" file
 %  and remember to run:
 % latex bibtex latex latex
@@ -266,60 +222,10 @@ According to this analysis, the projected winner is Donald Trump with 269 to 264
 %
 %APPENDICES are optional
 %\balancecolumns
-\appendix
+%\appendix
 %Appendix A
-\section{Sample Tweets}
-\label{sssec:num1} 
+%\section{Sample Tweets}
 
-\verb user_location: Ohio\\
-\verb created_at: Sun Jan 31 17:15:53 +0000 2016\\
-\verb id_str: 693845165463752705\\
-t\verb ext: RT @samantharonson: Donald Trump has flip-flopped so much that Stephen Colbert hosted a Trump vs. Trump debate https://t.co/Wa8c8WkfTo via ?\\
-\verb user_screen_name: christinerod1\\
-\verb user_id_str: 27403847\\
-\verb place: None\\
-\verb user_friends_count: 286\\
-\verb user_followers_count: 52\\
-\verb user_lang: en\\
-
-\verb user_location: Atlanta, GA\\
-\verb created_at: Sun Jan 31 17:25:18 +0000 2016\\
-\verb id_str: 693847538554789889\\
-\verb text: RT @redsteeze: Also a good modern day analogy of Donald Trump and the Republican Party https://t.co/Gv0L0MimV2\\
-\verb user_screen_name: WarDamnGunners\\
-\verb user_id_str: 728693384\\
-\verb place: None\\
-\verb user_friends_count: 533\\
-\verb user_followers_count: 463\\
-\verb user_lang: en\\
-
-\verb user_location: North Carolina\\
-\verb created_at: Mon Feb 01 02:17:10 +0000 2016\\
-\verb id_str: 693981384113831936\\
-\verb text: RT @SavageNation: BREAKING POLL: Donald Trump Is winning Latino Republicans: Si Se Puede! In new poll on Latino voters finds Don... https:/?\\
-\verb user_screen_name: NewsieSc\\
-\verb user_id_str: 2946622600\\
-\verb place: None\\
-\verb user_friends_count: 937\\
-\verb user_followers_count: 489\\
-\verb user_lang: en\\
-
-\section{Summarized Data}
-\label{sssec:num2} 
-
-\begin{figure}
-\centering
-\includegraphics[width=3.5in, height=3.5in]{WinnerCalculation1.pdf}
-\caption{Electoral Votes won by state}
-\label{WinnerCalculation}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=3.5in, height=3.5in]{WinnerCalculation2.pdf}
-\caption{Electoral Votes won by state (contd.)}
-\label{WinnerCalculation}
-\end{figure}
 %\balancecolumns % GM June 2007
 % That's all folks!
 \end{document}
