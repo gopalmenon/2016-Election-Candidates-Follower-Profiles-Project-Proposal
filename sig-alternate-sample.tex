@@ -193,10 +193,34 @@ Previous research has been done by Kloumann and Kleinberg \cite{SeedSet} on iden
 \section{Approach}
 I plan to use the tweets collected as part of Assignment 1 as the seed set. If required, I will retrieve more tweets to use as part of the seed set. The PageRank algorithm will be used to identify important members of the community by sorting the community by PageRank and selecting the ones with the higher values. Once the important community members are available, I plan to use Latent Dirichlet allocation (LDA) topic modeling on their tweets using the R package for finding the topics important to them.
 
-\subsection{Design}
+\subsection{High Level Design}
+I plan to expand the seed set using the PageRank algorithm. Each member of the seed set will be a Twitter account. The other accounts followed by the seed account will constitute the equivalent of the forward links on a web page. In addition to the forward links, the list of accounts that are followers of an account will be the incoming links. This is where my approach differs from PageRank. I plan to evaluate the output both with and without the incoming links. Use of PageRank will expand the seed set and give me a big community that is linked together. 
+
+When the community is sorted by decreasing order of page rank, I will obtain the thought leaders in the community. These accounts with higher page rank will be thought leaders as they will be the ones that are most important due to the fact that more people follow them.
+
+Once the community though leaders have been obtained, I plan to use topic modeling on their Tweets in order to find out what issues and topics interest them and their followers.
+
+At the end of the project, I will have obtained the thought leaders in the Twitter community for each of the two presidential candidates and the topics and issues that matter to them.
+
 \subsection{Tools and Techniques}
+
+I plan to use Twitter APIs through Python for retrieval of Tweets and for Twitter account crawling. 
+
+The R package has topic mining libraries that I plan to use.
+
 \section{Milestones}
+\begin{itemize}
+\item High Level Design complete - mid March
+\item Seed set identification complete - $3^{rd}$ week of March
+\item Twitter account crawling complete - $1^{st}$ week of April
+\item Topic Modeling complete - $3^{rd}$ week of April
+\item Project Report complete - end of April
+\end{itemize}
 \section{Evaluation Criteria for Results}
+
+I expect to get a list of Twitter community thought leaders for each of the two candidates and their main topics and issues.
+
+There is no way to predict what results I am going to get, although I am sure that they will be interesting. The interesting for me will be the answer to the question \emph{who would want to support Donald Trump}. 
 
 \begin{thebibliography}{1}
 
